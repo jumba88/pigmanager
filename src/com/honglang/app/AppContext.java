@@ -16,6 +16,7 @@ import java.util.UUID;
 
 import com.honglang.app.utils.MethodsCompat;
 import com.honglang.app.utils.StringUtils;
+import com.honglang.app.utils.UIHelper;
 
 import android.app.Application;
 import android.content.Context;
@@ -33,7 +34,6 @@ import android.webkit.CacheManager;
 
 /**
  * 全局应用程序类：用于保存和调用全局应用配置及访问网络数据
- * @author liux (http://my.oschina.net/liux)
  * @version 1.0
  * @created 2012-3-21
  */
@@ -55,8 +55,8 @@ public class AppContext extends Application {
 	private Handler unLoginHandler = new Handler(){
 		public void handleMessage(Message msg) {
 			if(msg.what == 1){
-//				UIHelper.ToastMessage(AppContext.this, getString(R.string.msg_login_error));
-//				UIHelper.showLoginDialog(AppContext.this);
+				UIHelper.ToastMessage(AppContext.this, getString(R.string.msg_login_error));
+				UIHelper.showLoginDialog(AppContext.this);
 			}
 		}		
 	};
@@ -65,7 +65,7 @@ public class AppContext extends Application {
 	public void onCreate() {
 		super.onCreate();
         //注册App异常崩溃处理器
-//        Thread.setDefaultUncaughtExceptionHandler(AppException.getAppExceptionHandler());
+        Thread.setDefaultUncaughtExceptionHandler(AppException.getAppExceptionHandler());
         
         init();
 	}
@@ -75,11 +75,11 @@ public class AppContext extends Application {
 	 */
 	private void init(){
 		//设置保存图片的路径
-//		saveImagePath = getProperty(AppConfig.SAVE_IMAGE_PATH);
-//		if(StringUtils.isEmpty(saveImagePath)){
-//			setProperty(AppConfig.SAVE_IMAGE_PATH, AppConfig.DEFAULT_SAVE_IMAGE_PATH);
-//			saveImagePath = AppConfig.DEFAULT_SAVE_IMAGE_PATH;
-//		}
+		saveImagePath = getProperty(AppConfig.SAVE_IMAGE_PATH);
+		if(StringUtils.isEmpty(saveImagePath)){
+			setProperty(AppConfig.SAVE_IMAGE_PATH, AppConfig.DEFAULT_SAVE_IMAGE_PATH);
+			saveImagePath = AppConfig.DEFAULT_SAVE_IMAGE_PATH;
+		}
 	}
 	
 	/**
@@ -165,14 +165,14 @@ public class AppContext extends Application {
 	 * 获取App唯一标识
 	 * @return
 	 */
-//	public String getAppId() {
-//		String uniqueID = getProperty(AppConfig.CONF_APP_UNIQUEID);
-//		if(StringUtils.isEmpty(uniqueID)){
-//			uniqueID = UUID.randomUUID().toString();
-//			setProperty(AppConfig.CONF_APP_UNIQUEID, uniqueID);
-//		}
-//		return uniqueID;
-//	}
+	public String getAppId() {
+		String uniqueID = getProperty(AppConfig.CONF_APP_UNIQUEID);
+		if(StringUtils.isEmpty(uniqueID)){
+			uniqueID = UUID.randomUUID().toString();
+			setProperty(AppConfig.CONF_APP_UNIQUEID, uniqueID);
+		}
+		return uniqueID;
+	}
 	
 	/**
 	 * 用户是否登录
@@ -193,12 +193,12 @@ public class AppContext extends Application {
 	/**
 	 * 用户注销
 	 */
-//	public void Logout() {
-//		ApiClient.cleanCookie();
-//		this.cleanCookie();
-//		this.login = false;
-//		this.loginUid = 0;
-//	}
+	public void Logout() {
+		ApiClient.cleanCookie();
+		this.cleanCookie();
+		this.login = false;
+		this.loginUid = 0;
+	}
 	
 	/**
 	 * 未登录或修改密码后的处理
@@ -1231,7 +1231,7 @@ public class AppContext extends Application {
 //			setProperty("user.name", user.getName());
 //			setProperty("user.face", FileUtils.getFileName(user.getFace()));//用户头像-文件名
 //			setProperty("user.account", user.getAccount());
-//			setProperty("user.pwd", CyptoUtils.encode("oschinaApp",user.getPwd()));
+//			setProperty("user.pwd", CyptoUtils.encode("honglangApp",user.getPwd()));
 //			setProperty("user.location", user.getLocation());
 //			setProperty("user.followers", String.valueOf(user.getFollowers()));
 //			setProperty("user.fans", String.valueOf(user.getFans()));
@@ -1260,7 +1260,7 @@ public class AppContext extends Application {
 //		lu.setName(getProperty("user.name"));
 //		lu.setFace(getProperty("user.face"));
 //		lu.setAccount(getProperty("user.account"));
-//		lu.setPwd(CyptoUtils.decode("oschinaApp",getProperty("user.pwd")));
+//		lu.setPwd(CyptoUtils.decode("honglangApp",getProperty("user.pwd")));
 //		lu.setLocation(getProperty("user.location"));
 //		lu.setFollowers(StringUtils.toInt(getProperty("user.followers"), 0));
 //		lu.setFans(StringUtils.toInt(getProperty("user.fans"), 0));

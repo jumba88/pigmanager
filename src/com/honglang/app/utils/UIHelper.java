@@ -1,12 +1,17 @@
 package com.honglang.app.utils;
 
+import java.util.regex.Pattern;
+
+
 import com.honglang.app.AppManager;
 import com.honglang.app.R;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.widget.Toast;
 
 /**
  * 应用程序UI工具包：封装UI相关的一些操作
@@ -14,6 +19,83 @@ import android.content.Intent;
  */
 public class UIHelper {
 
+	private final static String TAG = "UIHelper";
+	
+	public final static int LISTVIEW_ACTION_INIT = 0x01;
+	public final static int LISTVIEW_ACTION_REFRESH = 0x02;
+	public final static int LISTVIEW_ACTION_SCROLL = 0x03;
+	public final static int LISTVIEW_ACTION_CHANGE_CATALOG = 0x04;
+
+	public final static int LISTVIEW_DATA_MORE = 0x01;
+	public final static int LISTVIEW_DATA_LOADING = 0x02;
+	public final static int LISTVIEW_DATA_FULL = 0x03;
+	public final static int LISTVIEW_DATA_EMPTY = 0x04;
+
+	public final static int LISTVIEW_DATATYPE_NEWS = 0x01;
+	public final static int LISTVIEW_DATATYPE_BLOG = 0x02;
+	public final static int LISTVIEW_DATATYPE_POST = 0x03;
+	public final static int LISTVIEW_DATATYPE_TWEET = 0x04;
+	public final static int LISTVIEW_DATATYPE_ACTIVE = 0x05;
+	public final static int LISTVIEW_DATATYPE_MESSAGE = 0x06;
+	public final static int LISTVIEW_DATATYPE_COMMENT = 0x07;
+
+	public final static int REQUEST_CODE_FOR_RESULT = 0x01;
+	public final static int REQUEST_CODE_FOR_REPLY = 0x02;
+
+	/** 表情图片匹配 */
+	private static Pattern facePattern = Pattern
+			.compile("\\[{1}([0-9]\\d*)\\]{1}");
+
+	/** 全局web样式 */
+	// 链接样式文件，代码块高亮的处理
+	public final static String linkCss = "<script type=\"text/javascript\" src=\"file:///android_asset/shCore.js\"></script>"
+			+ "<script type=\"text/javascript\" src=\"file:///android_asset/brush.js\"></script>"
+			+ "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/shThemeDefault.css\">"
+			+ "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/shCore.css\">"
+			+ "<script type=\"text/javascript\">SyntaxHighlighter.all();</script>";
+	public final static String WEB_STYLE = linkCss + "<style>* {font-size:14px;line-height:20px;} p {color:#333;} a {color:#3E62A6;} img {max-width:310px;} "
+			+ "img.alignleft {float:left;max-width:120px;margin:0 10px 5px 0;border:1px solid #ccc;background:#fff;padding:2px;} "
+			+ "pre {font-size:9pt;line-height:12pt;font-family:Courier New,Arial;border:1px solid #ddd;border-left:5px solid #6CE26C;background:#f6f6f6;padding:5px;overflow: auto;} "
+			+ "a.tag {font-size:15px;text-decoration:none;background-color:#bbd6f3;border-bottom:2px solid #3E6D8E;border-right:2px solid #7F9FB6;color:#284a7b;margin:2px 2px 2px 0;padding:2px 4px;white-space:nowrap;}</style>";
+	/**
+	 * 显示首页
+	 * 
+	 * @param activity
+	 */
+	public static void showHome(Activity activity) {
+//		Intent intent = new Intent(activity, Main.class);
+//		activity.startActivity(intent);
+//		activity.finish();
+	}
+
+	/**
+	 * 显示登录页面
+	 * 
+	 * @param activity
+	 */
+	public static void showLoginDialog(Context context) {
+//		Intent intent = new Intent(context, LoginDialog.class);
+//		if (context instanceof Main)
+//			intent.putExtra("LOGINTYPE", LoginDialog.LOGIN_MAIN);
+//		else if (context instanceof Setting)
+//			intent.putExtra("LOGINTYPE", LoginDialog.LOGIN_SETTING);
+//		else
+//			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//		context.startActivity(intent);
+	}
+
+	/**
+	 * 显示新闻详情
+	 * 
+	 * @param context
+	 * @param newsId
+	 */
+	public static void showNewsDetail(Context context, int newsId) {
+//		Intent intent = new Intent(context, NewsDetail.class);
+//		intent.putExtra("news_id", newsId);
+//		context.startActivity(intent);
+	}
+	
 	/**
 	 * 发送App异常崩溃报告
 	 * 
@@ -35,7 +117,7 @@ public class UIHelper {
 						// i.setType("text/plain"); //模拟器
 						i.setType("message/rfc822"); // 真机
 						i.putExtra(Intent.EXTRA_EMAIL,
-								new String[] { "zhangdeyi@oschina.net" });
+								new String[] { "pigmanager@honglang.net" });
 						i.putExtra(Intent.EXTRA_SUBJECT,
 								"猪管家Android客户端 - 错误报告");
 						i.putExtra(Intent.EXTRA_TEXT, crashReport);
@@ -53,6 +135,23 @@ public class UIHelper {
 					}
 				});
 		builder.show();
+	}
+	
+	/**
+	 * 弹出Toast消息
+	 * 
+	 * @param msg
+	 */
+	public static void ToastMessage(Context cont, String msg) {
+		Toast.makeText(cont, msg, Toast.LENGTH_SHORT).show();
+	}
+
+	public static void ToastMessage(Context cont, int msg) {
+		Toast.makeText(cont, msg, Toast.LENGTH_SHORT).show();
+	}
+
+	public static void ToastMessage(Context cont, String msg, int time) {
+		Toast.makeText(cont, msg, time).show();
 	}
 	
 }

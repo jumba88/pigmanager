@@ -10,6 +10,8 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.honglang.app.ApiClient;
+import com.honglang.app.AppException;
 
 import android.graphics.Bitmap;
 import android.os.Handler;
@@ -21,7 +23,6 @@ import android.widget.ImageView;
  * BitmapManager bmpManager;
  * bmpManager = new BitmapManager(BitmapFactory.decodeResource(context.getResources(), R.drawable.loading));
  * bmpManager.loadBitmap(imageURL, imageView);
- * @author liux (http://my.oschina.net/liux)
  * @version 1.0
  * @created 2012-6-25
  */
@@ -157,18 +158,18 @@ public class BitmapManager {
      */
     private Bitmap downloadBitmap(String url, int width, int height) {   
         Bitmap bitmap = null;
-//        try {
-//			//http加载图片
-//			bitmap = ApiClient.getNetBitmap(url);
-//			if(width > 0 && height > 0) {
-//				//指定显示图片的高宽
-//				bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
-//			} 
-//			//放入缓存
-//			cache.put(url, new SoftReference<Bitmap>(bitmap));
-//		} catch (AppException e) {
-//			e.printStackTrace();
-//		}
+        try {
+			//http加载图片
+			bitmap = ApiClient.getNetBitmap(url);
+			if(width > 0 && height > 0) {
+				//指定显示图片的高宽
+				bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
+			} 
+			//放入缓存
+			cache.put(url, new SoftReference<Bitmap>(bitmap));
+		} catch (AppException e) {
+			e.printStackTrace();
+		}
         return bitmap;  
     }  
 }

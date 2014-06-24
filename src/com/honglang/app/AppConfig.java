@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
 
+import com.honglang.app.bean.AccessInfo;
 import com.honglang.app.utils.StringUtils;
 
 import android.annotation.SuppressLint;
@@ -16,7 +17,6 @@ import android.preference.PreferenceManager;
 /**
  * 应用程序配置类：用于保存用户相关信息及设置
  * 
- * @author liux (http://my.oschina.net/liux)
  * @version 1.0
  * @created 2012-3-21
  */
@@ -46,10 +46,10 @@ public class AppConfig {
 
 	public final static String SAVE_IMAGE_PATH = "save_image_path";
 	@SuppressLint("NewApi")
-	public final static String DEFAULT_SAVE_IMAGE_PATH = Environment.getExternalStorageDirectory()+ File.separator+ "OSChina"+ File.separator;
+	public final static String DEFAULT_SAVE_IMAGE_PATH = Environment.getExternalStorageDirectory()+ File.separator+ "honglang"+ File.separator;
 			
 	private Context mContext;
-//	private AccessInfo accessInfo = null;
+	private AccessInfo accessInfo = null;
 	private static AppConfig appConfig;
 
 	public static AppConfig getAppConfig(Context context) {
@@ -102,29 +102,29 @@ public class AppConfig {
 		return StringUtils.toLong(get(CONF_EXPIRESIN));
 	}
 
-//	public void setAccessInfo(String accessToken, String accessSecret,
-//			long expiresIn) {
-//		if (accessInfo == null)
-//			accessInfo = new AccessInfo();
-//		accessInfo.setAccessToken(accessToken);
-//		accessInfo.setAccessSecret(accessSecret);
-//		accessInfo.setExpiresIn(expiresIn);
-//		// 保存到配置
-//		this.setAccessToken(accessToken);
-//		this.setAccessSecret(accessSecret);
-//		this.setExpiresIn(expiresIn);
-//	}
-//
-//	public AccessInfo getAccessInfo() {
-//		if (accessInfo == null && !StringUtils.isEmpty(getAccessToken())
-//				&& !StringUtils.isEmpty(getAccessSecret())) {
-//			accessInfo = new AccessInfo();
-//			accessInfo.setAccessToken(getAccessToken());
-//			accessInfo.setAccessSecret(getAccessSecret());
-//			accessInfo.setExpiresIn(getExpiresIn());
-//		}
-//		return accessInfo;
-//	}
+	public void setAccessInfo(String accessToken, String accessSecret,
+			long expiresIn) {
+		if (accessInfo == null)
+			accessInfo = new AccessInfo();
+		accessInfo.setAccessToken(accessToken);
+		accessInfo.setAccessSecret(accessSecret);
+		accessInfo.setExpiresIn(expiresIn);
+		// 保存到配置
+		this.setAccessToken(accessToken);
+		this.setAccessSecret(accessSecret);
+		this.setExpiresIn(expiresIn);
+	}
+
+	public AccessInfo getAccessInfo() {
+		if (accessInfo == null && !StringUtils.isEmpty(getAccessToken())
+				&& !StringUtils.isEmpty(getAccessSecret())) {
+			accessInfo = new AccessInfo();
+			accessInfo.setAccessToken(getAccessToken());
+			accessInfo.setAccessSecret(getAccessSecret());
+			accessInfo.setExpiresIn(getExpiresIn());
+		}
+		return accessInfo;
+	}
 
 	public String get(String key) {
 		Properties props = get();
