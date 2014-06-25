@@ -3,14 +3,19 @@ package com.honglang.app.utils;
 import java.util.regex.Pattern;
 
 
+
+
+
 import com.honglang.app.AppManager;
 import com.honglang.app.R;
+import com.honglang.app.bean.URLs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.widget.Toast;
 
 /**
@@ -152,6 +157,53 @@ public class UIHelper {
 
 	public static void ToastMessage(Context cont, String msg, int time) {
 		Toast.makeText(cont, msg, time).show();
+	}
+	
+	public static void showLinkRedirect(Context context, int objType,
+			int objId, String objKey) {
+		switch (objType) {
+		case URLs.URL_OBJ_TYPE_NEWS:
+			showNewsDetail(context, objId);
+			break;
+//		case URLs.URL_OBJ_TYPE_QUESTION:
+//			showQuestionDetail(context, objId);
+//			break;
+//		case URLs.URL_OBJ_TYPE_QUESTION_TAG:
+//			showQuestionListByTag(context, objKey);
+//			break;
+//		case URLs.URL_OBJ_TYPE_SOFTWARE:
+//			showSoftwareDetail(context, objKey);
+//			break;
+//		case URLs.URL_OBJ_TYPE_ZONE:
+//			showUserCenter(context, objId, objKey);
+//			break;
+//		case URLs.URL_OBJ_TYPE_TWEET:
+//			showTweetDetail(context, objId);
+//			break;
+//		case URLs.URL_OBJ_TYPE_BLOG:
+//			showBlogDetail(context, objId);
+//			break;
+		case URLs.URL_OBJ_TYPE_OTHER:
+			openBrowser(context, objKey);
+			break;
+		}
+	}
+
+	/**
+	 * 打开浏览器
+	 * 
+	 * @param context
+	 * @param url
+	 */
+	public static void openBrowser(Context context, String url) {
+		try {
+			Uri uri = Uri.parse(url);
+			Intent it = new Intent(Intent.ACTION_VIEW, uri);
+			context.startActivity(it);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ToastMessage(context, "无法浏览此网页", 500);
+		}
 	}
 	
 }
