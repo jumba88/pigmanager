@@ -178,28 +178,33 @@ public final class R {
         public static final int login_loading_18=0x7f020021;
         public static final int login_loading_19=0x7f020022;
         public static final int login_user_table_bg=0x7f020023;
-        public static final int manufacturer_normal=0x7f020024;
-        public static final int manufacturer_selected=0x7f020025;
-        public static final int new_data_toast=0x7f020026;
-        public static final int news_normal=0x7f020027;
-        public static final int news_selected=0x7f020028;
-        public static final int price_normal=0x7f020029;
-        public static final int price_selected=0x7f02002a;
-        public static final int profile_normal=0x7f02002b;
-        public static final int profile_selected=0x7f02002c;
-        public static final int splash=0x7f02002d;
-        public static final int top_bg=0x7f02002e;
-        public static final int userinfo_dialog_bg=0x7f02002f;
-        public static final int widget_bar_bg=0x7f020030;
-        public static final int widget_dface_border=0x7f020031;
-        public static final int widget_dface_border_n=0x7f020032;
-        public static final int widget_dface_border_p=0x7f020033;
-        public static final int widget_dface_loading=0x7f020034;
-        public static final int wiki_normal=0x7f020035;
-        public static final int wiki_selected=0x7f020036;
+        public static final int main_footbar_manufacturer=0x7f020024;
+        public static final int main_footbar_manufacturer_normal=0x7f020025;
+        public static final int main_footbar_manufacturer_selected=0x7f020026;
+        public static final int main_footbar_news=0x7f020027;
+        public static final int main_footbar_news_normal=0x7f020028;
+        public static final int main_footbar_news_selected=0x7f020029;
+        public static final int main_footbar_price=0x7f02002a;
+        public static final int main_footbar_price_normal=0x7f02002b;
+        public static final int main_footbar_price_selected=0x7f02002c;
+        public static final int main_footbar_profile=0x7f02002d;
+        public static final int main_footbar_profile_normal=0x7f02002e;
+        public static final int main_footbar_profile_selected=0x7f02002f;
+        public static final int main_footbar_wiki=0x7f020030;
+        public static final int main_footbar_wiki_normal=0x7f020031;
+        public static final int main_footbar_wiki_selected=0x7f020032;
+        public static final int new_data_toast=0x7f020033;
+        public static final int splash=0x7f020034;
+        public static final int top_bg=0x7f020035;
+        public static final int userinfo_dialog_bg=0x7f020036;
+        public static final int widget_bar_bg=0x7f020037;
+        public static final int widget_dface_border=0x7f020038;
+        public static final int widget_dface_border_n=0x7f020039;
+        public static final int widget_dface_border_p=0x7f02003a;
+        public static final int widget_dface_loading=0x7f02003b;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0017;
+        public static final int action_settings=0x7f0b001d;
         public static final int app_start_view=0x7f0b0000;
         public static final int loading_bar=0x7f0b0001;
         public static final int loading_text=0x7f0b0002;
@@ -214,22 +219,29 @@ public final class R {
         public static final int login_user_table=0x7f0b0006;
         public static final int logindialog_space=0x7f0b0003;
         public static final int logindialog_view_switcher=0x7f0b0005;
-        public static final int new_data_toast_message=0x7f0b000e;
-        public static final int user_center_devplatform=0x7f0b0014;
-        public static final int user_center_expertise=0x7f0b0015;
-        public static final int user_center_from=0x7f0b0011;
-        public static final int user_center_gender=0x7f0b0010;
-        public static final int user_center_jointime=0x7f0b0012;
-        public static final int user_center_latestonline=0x7f0b0016;
-        public static final int user_center_userface=0x7f0b0013;
-        public static final int user_center_username=0x7f0b000f;
+        public static final int main_footbar_manufacturer=0x7f0b0011;
+        public static final int main_footbar_news=0x7f0b000f;
+        public static final int main_footbar_price=0x7f0b0010;
+        public static final int main_footbar_profile=0x7f0b0013;
+        public static final int main_footbar_wiki=0x7f0b0012;
+        public static final int main_linearlayout_footer=0x7f0b000e;
+        public static final int new_data_toast_message=0x7f0b0014;
+        public static final int user_center_devplatform=0x7f0b001a;
+        public static final int user_center_expertise=0x7f0b001b;
+        public static final int user_center_from=0x7f0b0017;
+        public static final int user_center_gender=0x7f0b0016;
+        public static final int user_center_jointime=0x7f0b0018;
+        public static final int user_center_latestonline=0x7f0b001c;
+        public static final int user_center_userface=0x7f0b0019;
+        public static final int user_center_username=0x7f0b0015;
     }
     public static final class layout {
         public static final int app_start=0x7f030000;
         public static final int loadingdialog=0x7f030001;
         public static final int login_dialog=0x7f030002;
-        public static final int new_data_toast=0x7f030003;
-        public static final int user_center_content=0x7f030004;
+        public static final int main_footer=0x7f030003;
+        public static final int new_data_toast=0x7f030004;
+        public static final int user_center_content=0x7f030005;
     }
     public static final class menu {
         public static final int app_start=0x7f0a0000;
@@ -343,5 +355,7 @@ public final class R {
          */
         public static final int AppTheme=0x7f090001;
         public static final int Dialog=0x7f090002;
+        public static final int footbar=0x7f090003;
+        public static final int main_footbar_radio=0x7f090004;
     }
 }
