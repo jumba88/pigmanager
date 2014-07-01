@@ -31,7 +31,6 @@ public class ScrollLayout extends ViewGroup {
 
     /**
      * 设置是否可左右滑动
-     * @author liux
      */
     private boolean isScroll = true;
     public void setIsScroll(boolean b) {

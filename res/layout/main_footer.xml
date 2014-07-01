@@ -10,21 +10,26 @@
 		android:id="@+id/main_footbar_news"
 		android:checked="true"
 		style="@style/main_footbar_radio"
-		android:drawableTop="@drawable/main_footbar_news"/>
+		android:drawableTop="@drawable/main_footbar_news"
+		android:text="@string/main_news"/>
 	<RadioButton 
 		android:id="@+id/main_footbar_price"
 		style="@style/main_footbar_radio"
-		android:drawableTop="@drawable/main_footbar_price"/>
+		android:drawableTop="@drawable/main_footbar_price"
+		android:text="@string/main_price"/>
 	<RadioButton 
 		android:id="@+id/main_footbar_manufacturer"
 		style="@style/main_footbar_radio"
-		android:drawableTop="@drawable/main_footbar_manufacturer"/>
+		android:drawableTop="@drawable/main_footbar_manufacturer"
+		android:text="@string/main_manufacturer"/>
 	<RadioButton
 		android:id="@+id/main_footbar_wiki"
 		style="@style/main_footbar_radio"
-		android:drawableTop="@drawable/main_footbar_wiki"/>
+		android:drawableTop="@drawable/main_footbar_wiki"
+		android:text="@string/main_wiki"/>
 	<RadioButton
 		android:id="@+id/main_footbar_profile"
 		style="@style/main_footbar_radio"
-		android:drawableTop="@drawable/main_footbar_profile"/>
+		android:drawableTop="@drawable/main_footbar_profile"
+		android:text="@string/main_profile"/>
 </LinearLayout>
