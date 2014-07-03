@@ -4,11 +4,16 @@ import java.io.File;
 import java.util.List;
 
 
+
+
+
+import com.honglang.app.ui.Main;
 import com.honglang.app.utils.FileUtils;
 import com.honglang.app.utils.StringUtils;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +40,7 @@ public class AppStart extends Activity {
 		{
 			@Override
 			public void onAnimationEnd(Animation arg0) {
-//				redirectTo();
+				redirectTo();
 			}
 			@Override
 			public void onAnimationRepeat(Animation animation) {}
@@ -97,6 +102,15 @@ public class AppStart extends Activity {
 		} catch (Exception e) {
 		}
     	return res;
+    }
+    
+    /**
+     * 跳转到...
+     */
+    private void redirectTo(){        
+        Intent intent = new Intent(this, Main.class);
+        startActivity(intent);
+        finish();
     }
 
 }

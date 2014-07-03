@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -32,18 +32,15 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">fill_parent</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@drawable/main_footbar_textcolor</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">marquee</item>
         <item name="android:gravity">center</item>  
-        <item name="android:button">@null</item>  
-        <item name="android:paddingTop">@dimen/space_5</item>
-        <item name="android:paddingBottom">@dimen/space_1</item>
+        <item name="android:button">@null</item>          <item name="android:layout_marginTop">@dimen/space_5</item>
     </style>
     
     <style name="main_footbar_radio" parent="footbar">
-        <item name="android:background">@drawable/widget_bar_bg</item>
         <item name="android:padding">0dip</item>
     </style>
 
