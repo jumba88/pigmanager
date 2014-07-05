@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="head_titles">
+        <item>资讯</item>
+        <item>行情</item>
+        <item>厂商</item>
+        <item>百科</item>
+        <item>管理</item>
+    </string-array>
+
+</resources>

@@ -14,4 +14,12 @@
         android:textColor="@color/white"
         android:textSize="18sp" />
 
+    <ProgressBar
+        android:id="@+id/loading"
+        style="@style/loading_small"
+        android:layout_centerVertical="true"
+		android:layout_marginLeft="5.0dip"
+        android:layout_toRightOf="@+id/title"
+        android:visibility="gone" />
+
 </RelativeLayout>

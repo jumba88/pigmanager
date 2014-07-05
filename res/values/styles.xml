@@ -28,6 +28,13 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
     
+    <style name="loading_small" parent="@android:style/Widget.ProgressBar.Small">
+		<item name="android:indeterminateDrawable">@anim/loading</item>
+		<item name="android:layout_width">21dip</item> 
+		<item name="android:layout_height">21dip</item>
+		<item name="android:layout_gravity">center_vertical</item>
+	</style>
+    
     <style name="footbar">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">fill_parent</item>
@@ -37,11 +44,12 @@
         <item name="android:textStyle">bold</item>
         <item name="android:singleLine">true</item>
         <item name="android:gravity">center</item>  
-        <item name="android:button">@null</item>          <item name="android:layout_marginTop">@dimen/space_5</item>
+        <item name="android:button">@null</item>          <item name="android:layout_marginTop">@dimen/space_10</item>
     </style>
     
     <style name="main_footbar_radio" parent="footbar">
         <item name="android:padding">0dip</item>
+        <item name="android:drawablePadding">-10dp</item>
     </style>
 
 </resources>

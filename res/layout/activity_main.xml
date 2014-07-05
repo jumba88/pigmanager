@@ -12,6 +12,12 @@
         android:layout_height="0dp"
         android:layout_weight="1" >
         
+        <include layout="@layout/main_news"/>
+        <include layout="@layout/main_price"/>
+        <include layout="@layout/main_manufacturer"/>
+        <include layout="@layout/main_wiki"/>
+        <include layout="@layout/main_profile"/>
+        
         </com.honglang.app.widget.ScrollLayout>
     
     <include layout="@layout/main_footer" />
