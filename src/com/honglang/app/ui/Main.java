@@ -9,6 +9,7 @@ import com.honglang.app.widget.ScrollLayout;
 import com.honglang.app.widget.ScrollLayout.OnViewChangeListener;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -55,7 +56,18 @@ public class Main extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
+		if (mViewCount == 0) {
+			mViewCount = 5;
+		}
+		if (mCurSel == 0 && rbNews.isChecked()) {
+			rbNews.setChecked(true);
+			rbPrice.setChecked(false);
+			rbManufacturer.setChecked(false);
+			rbWiki.setChecked(false);
+			rbProfile.setChecked(false);
+		}
+		
+		mScrollLayout.setIsScroll(appContext.isScroll());
 	}
 
 	@Override
@@ -108,8 +120,8 @@ public class Main extends BaseActivity {
 						case 4:
 							break;
 						}
-						mScrollLayout.snapToScreen(pos);
 					}
+					mScrollLayout.snapToScreen(pos);
 				}
 			});
 		}
@@ -150,11 +162,5 @@ public class Main extends BaseActivity {
 		mHeadTitle.setText(mHeadTitles[index]);
 		mCurSel = index;
 	}
-	// @Override
-	// public boolean onCreateOptionsMenu(Menu menu) {
-	// // Inflate the menu; this adds items to the action bar if it is present.
-	// getMenuInflater().inflate(R.menu.main, menu);
-	// return true;
-	// }
 
 }

@@ -1375,15 +1375,15 @@ public class AppContext extends Application {
 	 * 是否左右滑动
 	 * @return
 	 */
-//	public boolean isScroll()
-//	{
-//		String perf_scroll = getProperty(AppConfig.CONF_SCROLL);
-//		//默认是关闭左右滑动
-//		if(StringUtils.isEmpty(perf_scroll))
-//			return false;
-//		else
-//			return StringUtils.toBool(perf_scroll);
-//	}
+	public boolean isScroll()
+	{
+		String perf_scroll = getProperty(AppConfig.CONF_SCROLL);
+		//默认是关闭左右滑动
+		if(StringUtils.isEmpty(perf_scroll))
+			return false;
+		else
+			return StringUtils.toBool(perf_scroll);
+	}
 	
 	/**
 	 * 设置是否左右滑动
