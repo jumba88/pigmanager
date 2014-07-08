@@ -1,6 +1,7 @@
 package com.honglang.app.ui;
 
 import com.honglang.app.AppContext;
+import com.honglang.app.AppManager;
 import com.honglang.app.R;
 import com.honglang.app.R.layout;
 import com.honglang.app.R.menu;
@@ -9,6 +10,7 @@ import com.honglang.app.widget.ScrollLayout;
 import com.honglang.app.widget.ScrollLayout.OnViewChangeListener;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -18,7 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-public class Main extends BaseActivity {
+public class Main extends FragmentActivity {
 
 	private ScrollLayout mScrollLayout;
 	private RadioButton[] mButtons;
@@ -40,6 +42,8 @@ public class Main extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// 添加Activity到堆栈
+		AppManager.getAppManager().addActivity(this);
 		setContentView(R.layout.activity_main);
 
 		appContext = (AppContext) getApplication();
@@ -73,7 +77,8 @@ public class Main extends BaseActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-
+		// 结束Activity&从堆栈中移除
+		AppManager.getAppManager().finishActivity(this);
 	}
 
 	public void initHeadView() {

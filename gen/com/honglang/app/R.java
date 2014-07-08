@@ -544,9 +544,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int widget_dface_border_n=0x7f020049;
         public static final int widget_dface_border_p=0x7f02004a;
         public static final int widget_dface_loading=0x7f02004b;
+        public static final int xlistview_arrow=0x7f02004c;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0025;
+        public static final int action_settings=0x7f0b0030;
         public static final int app_start_view=0x7f0b0006;
         public static final int bottom=0x7f0b0003;
         public static final int loading=0x7f0b001b;
@@ -569,21 +570,32 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int main_footbar_profile=0x7f0b0019;
         public static final int main_footbar_wiki=0x7f0b0018;
         public static final int main_footer_frame=0x7f0b0014;
-        public static final int new_data_toast_message=0x7f0b001c;
+        public static final int new_data_toast_message=0x7f0b001e;
         public static final int none=0x7f0b0000;
         public static final int scroll=0x7f0b0005;
+        public static final int tabIndicator=0x7f0b001c;
         public static final int title=0x7f0b001a;
         public static final int top=0x7f0b0004;
         public static final int triangle=0x7f0b0001;
         public static final int underline=0x7f0b0002;
-        public static final int user_center_devplatform=0x7f0b0022;
-        public static final int user_center_expertise=0x7f0b0023;
-        public static final int user_center_from=0x7f0b001f;
-        public static final int user_center_gender=0x7f0b001e;
-        public static final int user_center_jointime=0x7f0b0020;
-        public static final int user_center_latestonline=0x7f0b0024;
-        public static final int user_center_userface=0x7f0b0021;
-        public static final int user_center_username=0x7f0b001d;
+        public static final int user_center_devplatform=0x7f0b0024;
+        public static final int user_center_expertise=0x7f0b0025;
+        public static final int user_center_from=0x7f0b0021;
+        public static final int user_center_gender=0x7f0b0020;
+        public static final int user_center_jointime=0x7f0b0022;
+        public static final int user_center_latestonline=0x7f0b0026;
+        public static final int user_center_userface=0x7f0b0023;
+        public static final int user_center_username=0x7f0b001f;
+        public static final int viewpager=0x7f0b001d;
+        public static final int xlistview_footer_content=0x7f0b0027;
+        public static final int xlistview_footer_hint_textview=0x7f0b0029;
+        public static final int xlistview_footer_progressbar=0x7f0b0028;
+        public static final int xlistview_header_arrow=0x7f0b002e;
+        public static final int xlistview_header_content=0x7f0b002a;
+        public static final int xlistview_header_hint_textview=0x7f0b002c;
+        public static final int xlistview_header_progressbar=0x7f0b002f;
+        public static final int xlistview_header_text=0x7f0b002b;
+        public static final int xlistview_header_time=0x7f0b002d;
     }
     public static final class integer {
         public static final int default_circle_indicator_orientation=0x7f0d0000;
@@ -606,6 +618,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int main_wiki=0x7f03000a;
         public static final int new_data_toast=0x7f03000b;
         public static final int user_center_content=0x7f03000c;
+        public static final int xlistview_footer=0x7f03000d;
+        public static final int xlistview_header=0x7f03000e;
     }
     public static final class menu {
         public static final int app_start=0x7f0e0000;
@@ -695,7 +709,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int submit_report=0x7f09000c;
         public static final int sure=0x7f090008;
         public static final int title_activity_app_start=0x7f090039;
-        public static final int title_activity_main=0x7f09004b;
+        public static final int xlistview_footer_hint_normal=0x7f09004f;
+        public static final int xlistview_footer_hint_ready=0x7f090050;
+        public static final int xlistview_header_hint_loading=0x7f09004d;
+        public static final int xlistview_header_hint_normal=0x7f09004b;
+        public static final int xlistview_header_hint_ready=0x7f09004c;
+        public static final int xlistview_header_last_time=0x7f09004e;
         public static final int xml_parser_failed=0x7f090001;
     }
     public static final class style {
