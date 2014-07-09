@@ -1,16 +1,24 @@
 package com.honglang.app.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.honglang.app.AppContext;
 import com.honglang.app.AppManager;
 import com.honglang.app.R;
 import com.honglang.app.R.layout;
 import com.honglang.app.R.menu;
+import com.honglang.app.adapter.NewsPagerAdapter;
+import com.honglang.app.fragment.HeadlineFragment;
 import com.honglang.app.utils.UIHelper;
+import com.honglang.app.viewpagerindicator.TabPageIndicator;
 import com.honglang.app.widget.ScrollLayout;
 import com.honglang.app.widget.ScrollLayout.OnViewChangeListener;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -30,6 +38,12 @@ public class Main extends FragmentActivity {
 
 	private TextView mHeadTitle;
 	private ProgressBar mHeadProgress;
+	
+	private TabPageIndicator indicator;
+	private ViewPager viewPager;
+	private static final String[] CONTENT = new String[] { "头条", "猪价", "生猪", "育种", "饲料", "动保", "设备" };
+	private List<Fragment> fragments;
+	private NewsPagerAdapter pagerAdapter;
 
 	private RadioButton rbNews;
 	private RadioButton rbPrice;
@@ -54,6 +68,7 @@ public class Main extends FragmentActivity {
 		initHeadView();
 		initFootBar();
 		initScrollLayout();
+		initNews();
 
 	}
 
@@ -166,6 +181,24 @@ public class Main extends FragmentActivity {
 		mButtons[index].setChecked(true);
 		mHeadTitle.setText(mHeadTitles[index]);
 		mCurSel = index;
+	}
+	
+	/**
+	 * 
+	 */
+	private void initNews(){
+		indicator = (TabPageIndicator) findViewById(R.id.tabIndicator);
+		viewPager = (ViewPager) findViewById(R.id.viewpager);
+		
+		fragments = new ArrayList<Fragment>();
+		for (int i = 0; i < CONTENT.length; i++) {
+			fragments.add(new HeadlineFragment());
+		}
+		
+		pagerAdapter = new NewsPagerAdapter(getSupportFragmentManager(), fragments, CONTENT);
+		
+		viewPager.setAdapter(pagerAdapter);
+		indicator.setViewPager(viewPager);
 	}
 
 }
