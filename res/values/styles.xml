@@ -64,7 +64,7 @@
         <item name="centered">true</item>
     </style>
     <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
-        <item name="android:background">@drawable/custom_tab_indicator</item>
+        <!-- <item name="android:background">@drawable/custom_tab_indicator</item> -->
         <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
         <item name="android:textColor">@drawable/tab_indicator_selector</item>
         <item name="android:textSize">17sp</item>

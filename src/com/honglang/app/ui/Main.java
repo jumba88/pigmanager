@@ -187,8 +187,8 @@ public class Main extends FragmentActivity {
 	 * 
 	 */
 	private void initNews(){
-		indicator = (TabPageIndicator) findViewById(R.id.tabIndicator);
-		viewPager = (ViewPager) findViewById(R.id.viewpager);
+		indicator = (TabPageIndicator) findViewById(R.id.news_tabIndicator);
+		viewPager = (ViewPager) findViewById(R.id.news_viewpager);
 		
 		fragments = new ArrayList<Fragment>();
 		for (int i = 0; i < CONTENT.length; i++) {
