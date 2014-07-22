@@ -68,7 +68,7 @@ public class URLs implements Serializable {
 	public final static String UPDATE_VERSION = URL_API_HOST+"MobileAppVersion.xml";
 	public final static String REPORT = URL_API_HOST + "action/communityManage/report";
 	
-	private final static String URL_HOST = "oschina.net";
+	private final static String URL_HOST = "zhujia.aweb.com.cn";
 	private final static String URL_WWW_HOST = "www."+URL_HOST;
 	private final static String URL_MY_HOST = "my."+URL_HOST;
 	
@@ -129,25 +129,21 @@ public class URLs implements Serializable {
 				urls = new URLs();
 				//www
 				if(path.contains(URL_WWW_HOST )){
-					//新闻  www.oschina.net/news/27259/mobile-internet-market-is-small
 					if(path.contains(URL_TYPE_NEWS)){
 						objId = parseObjId(path, URL_TYPE_NEWS);
 						urls.setObjId(StringUtils.toInt(objId));
 						urls.setObjType(URL_OBJ_TYPE_NEWS);
 					}
-					//软件  www.oschina.net/p/jx
 					else if(path.contains(URL_TYPE_SOFTWARE)){
 						urls.setObjKey(parseObjKey(path, URL_TYPE_SOFTWARE));
 						urls.setObjType(URL_OBJ_TYPE_SOFTWARE);
 					}
 					//问答
 					else if(path.contains(URL_TYPE_QUESTION)){
-						//问答-标签  http://www.oschina.net/question/tag/python
 						if(path.contains(URL_TYPE_QUESTION_TAG)){
 							urls.setObjKey(parseObjKey(path, URL_TYPE_QUESTION_TAG));
 							urls.setObjType(URL_OBJ_TYPE_QUESTION_TAG);
 						}
-						//问答  www.oschina.net/question/12_45738
 						else{
 							objId = parseObjId(path, URL_TYPE_QUESTION);
 							String[] _tmp = objId.split(URL_UNDERLINE);
@@ -163,26 +159,22 @@ public class URLs implements Serializable {
 				}
 				//my
 				else if(path.contains(URL_MY_HOST)){					
-					//博客  my.oschina.net/szpengvictor/blog/50879
 					if(path.contains(URL_TYPE_BLOG)){
 						objId = parseObjId(path, URL_TYPE_BLOG);
 						urls.setObjId(StringUtils.toInt(objId));
 						urls.setObjType(URL_OBJ_TYPE_BLOG);
 					}
-					//动弹  my.oschina.net/dong706/tweet/612947
 					else if(path.contains(URL_TYPE_TWEET)){
 						objId = parseObjId(path, URL_TYPE_TWEET);
 						urls.setObjId(StringUtils.toInt(objId));
 						urls.setObjType(URL_OBJ_TYPE_TWEET);
 					}
-					//个人专页  my.oschina.net/u/12
 					else if(path.contains(URL_TYPE_ZONE)){
 						objId = parseObjId(path, URL_TYPE_ZONE);
 						urls.setObjId(StringUtils.toInt(objId));
 						urls.setObjType(URL_OBJ_TYPE_ZONE);
 					}
 					else{
-						//另一种个人专页  my.oschina.net/dong706
 						int p = path.indexOf(URL_MY_HOST+URL_SPLITTER) + (URL_MY_HOST+URL_SPLITTER).length();
 						String str = path.substring(p);
 						if(!str.contains(URL_SPLITTER)){

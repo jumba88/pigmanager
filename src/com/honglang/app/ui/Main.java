@@ -10,6 +10,7 @@ import com.honglang.app.R.layout;
 import com.honglang.app.R.menu;
 import com.honglang.app.adapter.NewsPagerAdapter;
 import com.honglang.app.fragment.HeadlineFragment;
+import com.honglang.app.fragment.PigPriceFragment;
 import com.honglang.app.utils.UIHelper;
 import com.honglang.app.viewpagerindicator.TabPageIndicator;
 import com.honglang.app.widget.ScrollLayout;
@@ -39,11 +40,17 @@ public class Main extends FragmentActivity {
 	private TextView mHeadTitle;
 	private ProgressBar mHeadProgress;
 	
-	private TabPageIndicator indicator;
-	private ViewPager viewPager;
+	private TabPageIndicator newsIndicator;
+	private ViewPager newsPager;
 	private static final String[] CONTENT = new String[] { "头条", "猪价", "生猪", "育种", "饲料", "动保", "设备" };
-	private List<Fragment> fragments;
-	private NewsPagerAdapter pagerAdapter;
+	private List<Fragment> newsFragments;
+	private NewsPagerAdapter newsAdapter;
+	
+	private TabPageIndicator pIndicator;
+	private ViewPager pricePager;
+	private static final String[] pCONTENT = new String[] { "生猪价格走势图", "玉米价格走势图" };
+	private List<Fragment> pFragments;
+	private NewsPagerAdapter pAdapter;
 
 	private RadioButton rbNews;
 	private RadioButton rbPrice;
@@ -69,6 +76,7 @@ public class Main extends FragmentActivity {
 		initFootBar();
 		initScrollLayout();
 		initNews();
+		initPrice();
 
 	}
 
@@ -184,21 +192,39 @@ public class Main extends FragmentActivity {
 	}
 	
 	/**
-	 * 
+	 * 初始化资讯
 	 */
 	private void initNews(){
-		indicator = (TabPageIndicator) findViewById(R.id.news_tabIndicator);
-		viewPager = (ViewPager) findViewById(R.id.news_viewpager);
+		newsIndicator = (TabPageIndicator) findViewById(R.id.news_tabIndicator);
+		newsPager = (ViewPager) findViewById(R.id.news_viewpager);
 		
-		fragments = new ArrayList<Fragment>();
+		newsFragments = new ArrayList<Fragment>();
 		for (int i = 0; i < CONTENT.length; i++) {
-			fragments.add(new HeadlineFragment());
+			newsFragments.add(new HeadlineFragment());
 		}
 		
-		pagerAdapter = new NewsPagerAdapter(getSupportFragmentManager(), fragments, CONTENT);
+		newsAdapter = new NewsPagerAdapter(getSupportFragmentManager(), newsFragments, CONTENT);
 		
-		viewPager.setAdapter(pagerAdapter);
-		indicator.setViewPager(viewPager);
+		newsPager.setAdapter(newsAdapter);
+		newsIndicator.setViewPager(newsPager);
+	}
+	
+	/**
+	 * 初始化行情
+	 */
+	private void initPrice(){
+		pIndicator = (TabPageIndicator) findViewById(R.id.price_tabIndicator);
+		pricePager = (ViewPager) findViewById(R.id.price_viewpager);
+		
+		pFragments = new ArrayList<Fragment>();
+		for (int i = 0; i < pCONTENT.length; i++) {
+			pFragments.add(new PigPriceFragment());
+		}
+		
+		pAdapter = new NewsPagerAdapter(getSupportFragmentManager(), pFragments, pCONTENT);
+		
+		pricePager.setAdapter(pAdapter);
+		pIndicator.setViewPager(pricePager);
 	}
 
 }
