@@ -95,5 +95,13 @@ public class PigPriceFragment extends Fragment implements OnChartValueSelectedLi
 	public void onNothingSelected() {
 		
 	}
+	
+	private void loadData(){
+		new Thread(){
+			public void run(){
+				
+			}
+		}.start();
+	}
 
 }

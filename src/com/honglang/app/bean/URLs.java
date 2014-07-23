@@ -68,6 +68,8 @@ public class URLs implements Serializable {
 	public final static String UPDATE_VERSION = URL_API_HOST+"MobileAppVersion.xml";
 	public final static String REPORT = URL_API_HOST + "action/communityManage/report";
 	
+	public final static String CHART = URL_API_HOST + "chartData.shtml";
+	
 	private final static String URL_HOST = "zhujia.aweb.com.cn";
 	private final static String URL_WWW_HOST = "www."+URL_HOST;
 	private final static String URL_MY_HOST = "my."+URL_HOST;
