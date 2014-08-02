@@ -14,6 +14,8 @@ import java.util.Map;
 
 
 
+
+
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
@@ -148,12 +150,15 @@ public class ApiClient {
 			try 
 			{
 				httpClient = getHttpClient();
-				httpGet = getHttpGet(url, cookie, userAgent);			
+				httpGet = getHttpGet(url, cookie, userAgent);
+//				httpClient = new HttpClient();
+//				httpGet = new GetMethod(url);
 				int statusCode = httpClient.executeMethod(httpGet);
 				if (statusCode != HttpStatus.SC_OK) {
 					throw AppException.http(statusCode);
 				}
 				responseBody = httpGet.getResponseBodyAsString();
+				Log.i("suxoyo", "responseBody="+responseBody);
 				break;				
 			} catch (HttpException e) {
 				time++;
@@ -196,7 +201,6 @@ public class ApiClient {
 				e.printStackTrace();
 			}			
 		}
-		Log.i("suxoyo", "NewsDetail="+new ByteArrayInputStream(responseBody.getBytes()).toString());
 		return new ByteArrayInputStream(responseBody.getBytes());
 	}
 	
@@ -452,5 +456,31 @@ public class ApiClient {
 //			throw AppException.network(e);
 //		}
 //	}
+	
+	/**
+	 * 获取图表数据
+	 * @param appContext
+	 * @param code
+	 * @return
+	 */
+	public static InputStream getChartData(AppContext appContext, final String code){
+		String url = _MakeURL(URLs.CHART, new HashMap<String, Object>(){{
+			put("areaId", code);
+		}});
+		String key = "areaId_" + code;
+		InputStream is = null;
+		if (appContext.isNetworkConnected()) {
+			try {
+				is = http_get(appContext, url);
+				appContext.writeFile(is, key);
+			} catch (AppException e) {
+				e.printStackTrace();
+				is = appContext.readFile(key);
+			}
+		} else {
+			is = appContext.readFile(key);
+		}
+		return is;
+	}
 	
 }

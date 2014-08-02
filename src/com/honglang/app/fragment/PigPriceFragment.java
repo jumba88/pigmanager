@@ -1,15 +1,23 @@
 package com.honglang.app.fragment;
 
+import java.io.InputStream;
+
+import org.json.JSONTokener;
+
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.interfaces.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Highlight;
+import com.honglang.app.ApiClient;
+import com.honglang.app.AppContext;
 import com.honglang.app.R;
 import com.honglang.app.widget.MyMarkerView;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +92,8 @@ public class PigPriceFragment extends Fragment implements OnChartValueSelectedLi
 
         // set the line to be drawn like this "- - - - - -"
         mChart.disableDashedLine();
+        
+        loadData();
 	}
 
 	@Override
@@ -99,7 +109,10 @@ public class PigPriceFragment extends Fragment implements OnChartValueSelectedLi
 	private void loadData(){
 		new Thread(){
 			public void run(){
-				
+				Message msg = new Message();
+				InputStream is = ApiClient.getChartData((AppContext)getActivity().getApplication(), "100000");
+				Log.i("suxoyo", is.toString());
+//				JSONTokener tokener = JSONTokener
 			}
 		}.start();
 	}

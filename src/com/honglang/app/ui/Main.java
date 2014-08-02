@@ -1,8 +1,11 @@
 package com.honglang.app.ui;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.mikephil.charting.charts.Chart;
+import com.honglang.app.ApiClient;
 import com.honglang.app.AppContext;
 import com.honglang.app.AppManager;
 import com.honglang.app.R;
@@ -17,6 +20,7 @@ import com.honglang.app.widget.ScrollLayout;
 import com.honglang.app.widget.ScrollLayout.OnViewChangeListener;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -24,6 +28,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -46,11 +51,11 @@ public class Main extends FragmentActivity {
 	private List<Fragment> newsFragments;
 	private NewsPagerAdapter newsAdapter;
 	
-	private TabPageIndicator pIndicator;
-	private ViewPager pricePager;
-	private static final String[] pCONTENT = new String[] { "生猪价格走势图", "玉米价格走势图" };
-	private List<Fragment> pFragments;
-	private NewsPagerAdapter pAdapter;
+	private Button btn_Price_pig;
+	private Button btn_Price_corn;
+	
+	private Chart chartPig;
+	private Chart chartCorn;
 
 	private RadioButton rbNews;
 	private RadioButton rbPrice;
@@ -213,18 +218,49 @@ public class Main extends FragmentActivity {
 	 * 初始化行情
 	 */
 	private void initPrice(){
-		pIndicator = (TabPageIndicator) findViewById(R.id.price_tabIndicator);
-		pricePager = (ViewPager) findViewById(R.id.price_viewpager);
+		btn_Price_pig = (Button) findViewById(R.id.price_pig);
+		btn_Price_corn = (Button) findViewById(R.id.price_corn);
 		
-		pFragments = new ArrayList<Fragment>();
-		for (int i = 0; i < pCONTENT.length; i++) {
-			pFragments.add(new PigPriceFragment());
-		}
+		chartPig = (Chart) findViewById(R.id.chart1);
+		chartCorn = (Chart) findViewById(R.id.chart2);
 		
-		pAdapter = new NewsPagerAdapter(getSupportFragmentManager(), pFragments, pCONTENT);
+		btn_Price_pig.setEnabled(false);
 		
-		pricePager.setAdapter(pAdapter);
-		pIndicator.setViewPager(pricePager);
+		btn_Price_pig.setOnClickListener(btnPriceClick(btn_Price_pig));
+		btn_Price_corn.setOnClickListener(btnPriceClick(btn_Price_corn));
+		
+		new Thread(){
+			public void run(){
+				Message msg = new Message();
+				InputStream is = ApiClient.getChartData(appContext, "100000");
+//				Log.i("suxoyo", is.toString());
+//				JSONTokener tokener = JSONTokener
+			}
+		}.start();
+		
+	}
+	
+	private OnClickListener btnPriceClick(final Button btn){
+		return new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (btn == btn_Price_pig) {
+					btn_Price_pig.setEnabled(false);
+					chartPig.setVisibility(View.VISIBLE);
+				} else {
+					btn_Price_pig.setEnabled(true);
+					chartPig.setVisibility(View.GONE);
+				}
+				if (btn == btn_Price_corn) {
+					btn_Price_corn.setEnabled(false);
+					chartCorn.setVisibility(View.VISIBLE);
+				} else {
+					btn_Price_corn.setEnabled(true);
+					chartCorn.setVisibility(View.GONE);
+				}
+			}
+		};
 	}
 
 }

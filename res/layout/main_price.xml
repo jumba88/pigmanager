@@ -3,18 +3,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <com.honglang.app.viewpagerindicator.TabPageIndicator 
-        android:id="@+id/price_tabIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="3dp" />
-    
-    <android.support.v4.view.ViewPager
-        android:id="@+id/price_viewpager"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="35dp"
+        android:orientation="horizontal" 
+		android:gravity="center_vertical" >
+
+        <Button
+            android:id="@+id/price_pig"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:enabled="false"
+            android:background="@android:color/transparent"
+            android:text="@string/main_price_pig"
+            android:textColor="@color/main_price_text_color"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:background="@drawable/custom_tab_indicator_divider" />
+
+        <Button
+            android:id="@+id/price_corn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|left"
+            android:enabled="true"
+            android:background="@android:color/transparent"
+            android:text="@string/main_price_corn"
+            android:textColor="@color/main_price_text_color"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+    
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </LinearLayout>

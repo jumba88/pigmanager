@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -1627,6 +1628,68 @@ public class AppContext extends Application {
 			fis = openFileInput(file);
 			ois = new ObjectInputStream(fis);
 			return (Serializable)ois.readObject();
+		}catch(FileNotFoundException e){
+		}catch(Exception e){
+			e.printStackTrace();
+			//反序列化失败 - 删除缓存文件
+			if(e instanceof InvalidClassException){
+				File data = getFileStreamPath(file);
+				data.delete();
+			}
+		}finally{
+			try {
+				ois.close();
+			} catch (Exception e) {}
+			try {
+				fis.close();
+			} catch (Exception e) {}
+		}
+		return null;
+	}
+	
+	/**
+	 * 保存对象
+	 * @param is
+	 * @param file
+	 * @throws IOException
+	 */
+	public boolean writeFile(InputStream is, String file) {
+		FileOutputStream fos = null;
+		ObjectOutputStream oos = null;
+		try{
+			fos = openFileOutput(file, MODE_PRIVATE);
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(is);
+			oos.flush();
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			try {
+				oos.close();
+			} catch (Exception e) {}
+			try {
+				fos.close();
+			} catch (Exception e) {}
+		}
+	}
+	
+	/**
+	 * 读取对象
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 */
+	public InputStream readFile(String file){
+		if(!isExistDataCache(file))
+			return null;
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		try{
+			fis = openFileInput(file);
+			ois = new ObjectInputStream(fis);
+			return (InputStream) ois.readObject();
 		}catch(FileNotFoundException e){
 		}catch(Exception e){
 			e.printStackTrace();

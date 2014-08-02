@@ -10,6 +10,10 @@
     <string name="main_manufacturer">厂商</string>
     <string name="main_wiki">百科</string>
     <string name="main_profile">管理</string>
+    
+    <string name="main_price_pig">猪肉价格走势图</string>
+    <string name="main_price_corn">玉米价格走势图</string>
+    
     <string name="login_dialog_logo">猪管家</string>
     <string name="login_dialog_account">账号:</string>
     <string name="login_dialog_account_hint">输入账号</string>

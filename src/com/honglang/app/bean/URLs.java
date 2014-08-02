@@ -16,7 +16,7 @@ import com.honglang.app.utils.StringUtils;
  */
 public class URLs implements Serializable {
 	
-	public final static String HOST = "http://zhujia.aweb.com.cn/";
+	public final static String HOST = "zhujia.aweb.com.cn/";
 	public final static String HTTP = "http://";
 	public final static String HTTPS = "https://";
 	
