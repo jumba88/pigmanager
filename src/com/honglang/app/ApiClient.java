@@ -16,6 +16,12 @@ import java.util.Map;
 
 
 
+
+
+
+
+
+
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
@@ -34,6 +40,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.honglang.app.bean.ChartData;
 import com.honglang.app.bean.Result;
 import com.honglang.app.bean.URLs;
 
@@ -458,29 +465,46 @@ public class ApiClient {
 //	}
 	
 	/**
+	 * 用户删除收藏
+	 * @param uid 用户UID
+	 * @param objid 比如是新闻ID 或者问答ID 或者动弹ID
+	 * @param type 1:软件 2:话题 3:博客 4:新闻 5:代码
+	 * @return
+	 * @throws AppException
+	 */
+	public static Result delFavorite(AppContext appContext, int uid, int objid, int type) throws AppException {
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("uid", uid);
+		params.put("objid", objid);
+		params.put("type", type);
+
+		try{
+			return http_post(appContext, URLs.FAVORITE_DELETE, params, null);		
+		}catch(Exception e){
+			if(e instanceof AppException)
+				throw (AppException)e;
+			throw AppException.network(e);
+		}
+	}
+	
+	/**
 	 * 获取图表数据
 	 * @param appContext
 	 * @param code
 	 * @return
+	 * @throws AppException 
 	 */
-	public static InputStream getChartData(AppContext appContext, final String code){
+	public static ChartData getChartData(AppContext appContext, final String code) throws AppException{
 		String url = _MakeURL(URLs.CHART, new HashMap<String, Object>(){{
 			put("areaId", code);
 		}});
-		String key = "areaId_" + code;
-		InputStream is = null;
-		if (appContext.isNetworkConnected()) {
-			try {
-				is = http_get(appContext, url);
-				appContext.writeFile(is, key);
-			} catch (AppException e) {
-				e.printStackTrace();
-				is = appContext.readFile(key);
-			}
-		} else {
-			is = appContext.readFile(key);
+		try {
+			return ChartData.parse(http_get(appContext, url));
+		} catch (Exception e) {
+			if(e instanceof AppException)
+				throw (AppException)e;
+			throw AppException.network(e);
 		}
-		return is;
 	}
 	
 }

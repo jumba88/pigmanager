@@ -7,11 +7,13 @@ import java.util.List;
 import com.github.mikephil.charting.charts.Chart;
 import com.honglang.app.ApiClient;
 import com.honglang.app.AppContext;
+import com.honglang.app.AppException;
 import com.honglang.app.AppManager;
 import com.honglang.app.R;
 import com.honglang.app.R.layout;
 import com.honglang.app.R.menu;
 import com.honglang.app.adapter.NewsPagerAdapter;
+import com.honglang.app.bean.ChartData;
 import com.honglang.app.fragment.HeadlineFragment;
 import com.honglang.app.fragment.PigPriceFragment;
 import com.honglang.app.utils.UIHelper;
@@ -232,7 +234,13 @@ public class Main extends FragmentActivity {
 		new Thread(){
 			public void run(){
 				Message msg = new Message();
-				InputStream is = ApiClient.getChartData(appContext, "100000");
+				try {
+					ChartData data = appContext.getChartData("100000");
+//					msg.what = data.get
+				} catch (AppException e) {
+					e.printStackTrace();
+				}
+//				InputStream is = ApiClient.getChartData(appContext, "100000");
 //				Log.i("suxoyo", is.toString());
 //				JSONTokener tokener = JSONTokener
 			}

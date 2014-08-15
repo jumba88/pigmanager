@@ -21,7 +21,7 @@ public class ChartData extends Entity {
 		return dataMap;
 	}
 	
-	private static ChartData parse(InputStream is) throws IOException, AppException {
+	public static ChartData parse(InputStream is) throws IOException, AppException {
 		ChartData chartdata = new ChartData();
 		JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 		JSONTokener tokener = new JSONTokener(new InputStreamReader(is, "UTF-8").toString());

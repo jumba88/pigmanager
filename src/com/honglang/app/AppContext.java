@@ -15,6 +15,13 @@ import java.util.Hashtable;
 import java.util.Properties;
 import java.util.UUID;
 
+import com.honglang.app.bean.ChartData;
+import com.honglang.app.bean.Notice;
+import com.honglang.app.bean.Result;
+import com.honglang.app.bean.User;
+import com.honglang.app.utils.CyptoUtils;
+import com.honglang.app.utils.FileUtils;
+import com.honglang.app.utils.ImageUtils;
 import com.honglang.app.utils.MethodsCompat;
 import com.honglang.app.utils.StringUtils;
 import com.honglang.app.utils.UIHelper;
@@ -1215,31 +1222,31 @@ public class AppContext extends Application {
 	 * @return
 	 * @throws AppException
 	 */
-//	public Result delFavorite(int uid, int objid, int type) throws AppException { 	
-//		return ApiClient.delFavorite(this, uid, objid, type);
-//	}
+	public Result delFavorite(int uid, int objid, int type) throws AppException { 	
+		return ApiClient.delFavorite(this, uid, objid, type);
+	}
 	
 	/**
 	 * 保存登录信息
 	 * @param username
 	 * @param pwd
 	 */
-//	public void saveLoginInfo(final User user) {
-//		this.loginUid = user.getUid();
-//		this.login = true;
-//		setProperties(new Properties(){{
-//			setProperty("user.uid", String.valueOf(user.getUid()));
-//			setProperty("user.name", user.getName());
-//			setProperty("user.face", FileUtils.getFileName(user.getFace()));//用户头像-文件名
-//			setProperty("user.account", user.getAccount());
-//			setProperty("user.pwd", CyptoUtils.encode("honglangApp",user.getPwd()));
-//			setProperty("user.location", user.getLocation());
-//			setProperty("user.followers", String.valueOf(user.getFollowers()));
-//			setProperty("user.fans", String.valueOf(user.getFans()));
-//			setProperty("user.score", String.valueOf(user.getScore()));
-//			setProperty("user.isRememberMe", String.valueOf(user.isRememberMe()));//是否记住我的信息
-//		}});		
-//	}
+	public void saveLoginInfo(final User user) {
+		this.loginUid = user.getUid();
+		this.login = true;
+		setProperties(new Properties(){{
+			setProperty("user.uid", String.valueOf(user.getUid()));
+			setProperty("user.name", user.getName());
+			setProperty("user.face", FileUtils.getFileName(user.getFace()));//用户头像-文件名
+			setProperty("user.account", user.getAccount());
+			setProperty("user.pwd", CyptoUtils.encode("honglangApp",user.getPwd()));
+			setProperty("user.location", user.getLocation());
+			setProperty("user.followers", String.valueOf(user.getFollowers()));
+			setProperty("user.fans", String.valueOf(user.getFans()));
+			setProperty("user.score", String.valueOf(user.getScore()));
+			setProperty("user.isRememberMe", String.valueOf(user.isRememberMe()));//是否记住我的信息
+		}});		
+	}
 	
 	/**
 	 * 清除登录信息
@@ -1255,33 +1262,33 @@ public class AppContext extends Application {
 	 * 获取登录信息
 	 * @return
 	 */
-//	public User getLoginInfo() {		
-//		User lu = new User();		
-//		lu.setUid(StringUtils.toInt(getProperty("user.uid"), 0));
-//		lu.setName(getProperty("user.name"));
-//		lu.setFace(getProperty("user.face"));
-//		lu.setAccount(getProperty("user.account"));
-//		lu.setPwd(CyptoUtils.decode("honglangApp",getProperty("user.pwd")));
-//		lu.setLocation(getProperty("user.location"));
-//		lu.setFollowers(StringUtils.toInt(getProperty("user.followers"), 0));
-//		lu.setFans(StringUtils.toInt(getProperty("user.fans"), 0));
-//		lu.setScore(StringUtils.toInt(getProperty("user.score"), 0));
-//		lu.setRememberMe(StringUtils.toBool(getProperty("user.isRememberMe")));
-//		return lu;
-//	}
+	public User getLoginInfo() {		
+		User lu = new User();		
+		lu.setUid(StringUtils.toInt(getProperty("user.uid"), 0));
+		lu.setName(getProperty("user.name"));
+		lu.setFace(getProperty("user.face"));
+		lu.setAccount(getProperty("user.account"));
+		lu.setPwd(CyptoUtils.decode("honglangApp",getProperty("user.pwd")));
+		lu.setLocation(getProperty("user.location"));
+		lu.setFollowers(StringUtils.toInt(getProperty("user.followers"), 0));
+		lu.setFans(StringUtils.toInt(getProperty("user.fans"), 0));
+		lu.setScore(StringUtils.toInt(getProperty("user.score"), 0));
+		lu.setRememberMe(StringUtils.toBool(getProperty("user.isRememberMe")));
+		return lu;
+	}
 	
 	/**
 	 * 保存用户头像
 	 * @param fileName
 	 * @param bitmap
 	 */
-//	public void saveUserFace(String fileName,Bitmap bitmap) {
-//		try {
-//			ImageUtils.saveImage(this, fileName, bitmap);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public void saveUserFace(String fileName,Bitmap bitmap) {
+		try {
+			ImageUtils.saveImage(this, fileName, bitmap);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * 获取用户头像
@@ -1289,42 +1296,42 @@ public class AppContext extends Application {
 	 * @return
 	 * @throws AppException
 	 */
-//	public Bitmap getUserFace(String key) throws AppException {
-//		FileInputStream fis = null;
-//		try{
-//			fis = openFileInput(key);
-//			return BitmapFactory.decodeStream(fis);
-//		}catch(Exception e){
-//			throw AppException.run(e);
-//		}finally{
-//			try {
-//				fis.close();
-//			} catch (Exception e) {}
-//		}
-//	}
+	public Bitmap getUserFace(String key) throws AppException {
+		FileInputStream fis = null;
+		try{
+			fis = openFileInput(key);
+			return BitmapFactory.decodeStream(fis);
+		}catch(Exception e){
+			throw AppException.run(e);
+		}finally{
+			try {
+				fis.close();
+			} catch (Exception e) {}
+		}
+	}
 	
 	/**
 	 * 是否加载显示文章图片
 	 * @return
 	 */
-//	public boolean isLoadImage()
-//	{
-//		String perf_loadimage = getProperty(AppConfig.CONF_LOAD_IMAGE);
-//		//默认是加载的
-//		if(StringUtils.isEmpty(perf_loadimage))
-//			return true;
-//		else
-//			return StringUtils.toBool(perf_loadimage);
-//	}
+	public boolean isLoadImage()
+	{
+		String perf_loadimage = getProperty(AppConfig.CONF_LOAD_IMAGE);
+		//默认是加载的
+		if(StringUtils.isEmpty(perf_loadimage))
+			return true;
+		else
+			return StringUtils.toBool(perf_loadimage);
+	}
 	
 	/**
 	 * 设置是否加载文章图片
 	 * @param b
 	 */
-//	public void setConfigLoadimage(boolean b)
-//	{
-//		setProperty(AppConfig.CONF_LOAD_IMAGE, String.valueOf(b));
-//	}
+	public void setConfigLoadimage(boolean b)
+	{
+		setProperty(AppConfig.CONF_LOAD_IMAGE, String.valueOf(b));
+	}
 	
 	/**
 	 * 是否发出提示音
@@ -1367,10 +1374,42 @@ public class AppContext extends Application {
 	 * 设置启动检查更新
 	 * @param b
 	 */
-//	public void setConfigCheckUp(boolean b)
-//	{
-//		setProperty(AppConfig.CONF_CHECKUP, String.valueOf(b));
-//	}
+	public void setConfigCheckUp(boolean b)
+	{
+		setProperty(AppConfig.CONF_CHECKUP, String.valueOf(b));
+	}
+	
+	/**
+	 * 图表数据
+	 * @param code
+	 * @return
+	 * @throws AppException
+	 */
+	public ChartData getChartData(String code) throws AppException{
+		ChartData data = null;
+		String key = "areaId_" + code;
+		if (isNetworkConnected()) {
+			try {
+				data = ApiClient.getChartData(this, code);
+				if (data != null) {
+					Notice notice = data.getNotice();
+					data.setNotice(null);
+					data.setCacheKey(key);
+					saveObject(data, key);
+					data.setNotice(notice);
+				}
+			} catch (AppException e) {
+				data = (ChartData) readObject(key);
+				if(data == null)
+					throw e;
+			}
+		} else {
+			data = (ChartData) readObject(key);
+			if (data == null)
+				data = new ChartData();
+		}
+		return data;
+	}
 	
 	/**
 	 * 是否左右滑动
@@ -1390,33 +1429,33 @@ public class AppContext extends Application {
 	 * 设置是否左右滑动
 	 * @param b
 	 */
-//	public void setConfigScroll(boolean b)
-//	{
-//		setProperty(AppConfig.CONF_SCROLL, String.valueOf(b));
-//	}
+	public void setConfigScroll(boolean b)
+	{
+		setProperty(AppConfig.CONF_SCROLL, String.valueOf(b));
+	}
 	
 	/**
 	 * 是否Https登录
 	 * @return
 	 */
-//	public boolean isHttpsLogin()
-//	{
-//		String perf_httpslogin = getProperty(AppConfig.CONF_HTTPS_LOGIN);
-//		//默认是http
-//		if(StringUtils.isEmpty(perf_httpslogin))
-//			return false;
-//		else
-//			return StringUtils.toBool(perf_httpslogin);
-//	}
+	public boolean isHttpsLogin()
+	{
+		String perf_httpslogin = getProperty(AppConfig.CONF_HTTPS_LOGIN);
+		//默认是http
+		if(StringUtils.isEmpty(perf_httpslogin))
+			return false;
+		else
+			return StringUtils.toBool(perf_httpslogin);
+	}
 	
 	/**
 	 * 设置是是否Https登录
 	 * @param b
 	 */
-//	public void setConfigHttpsLogin(boolean b)
-//	{
-//		setProperty(AppConfig.CONF_HTTPS_LOGIN, String.valueOf(b));
-//	}
+	public void setConfigHttpsLogin(boolean b)
+	{
+		setProperty(AppConfig.CONF_HTTPS_LOGIN, String.valueOf(b));
+	}
 	
 	/**
 	 * 清除保存的缓存

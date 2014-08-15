@@ -110,8 +110,8 @@ public class PigPriceFragment extends Fragment implements OnChartValueSelectedLi
 		new Thread(){
 			public void run(){
 				Message msg = new Message();
-				InputStream is = ApiClient.getChartData((AppContext)getActivity().getApplication(), "100000");
-				Log.i("suxoyo", is.toString());
+//				InputStream is = ApiClient.getChartData((AppContext)getActivity().getApplication(), "100000");
+//				Log.i("suxoyo", is.toString());
 //				JSONTokener tokener = JSONTokener
 			}
 		}.start();
