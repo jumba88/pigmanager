@@ -236,7 +236,7 @@ public class Main extends FragmentActivity {
 				Message msg = new Message();
 				try {
 					ChartData data = appContext.getChartData("100000");
-//					msg.what = data.get
+//					msg.what = data;
 				} catch (AppException e) {
 					e.printStackTrace();
 				}

@@ -15,20 +15,34 @@ import android.util.JsonReader;
 import com.honglang.app.AppException;
 
 public class ChartData extends Entity {
-	private HashMap<String, JSONArray> dataMap = new HashMap<String, JSONArray>();
 	
-	private HashMap<String,JSONArray> getChartData(){
-		return dataMap;
+	private JSONArray pigdata;
+	private JSONArray corndata;
+	
+	public JSONArray getPigdata() {
+		return pigdata;
 	}
-	
+
+	public void setPigdata(JSONArray pigdata) {
+		this.pigdata = pigdata;
+	}
+
+	public JSONArray getCorndata() {
+		return corndata;
+	}
+
+	public void setCorndata(JSONArray corndata) {
+		this.corndata = corndata;
+	}
+
 	public static ChartData parse(InputStream is) throws IOException, AppException {
 		ChartData chartdata = new ChartData();
-		JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+//		JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 		JSONTokener tokener = new JSONTokener(new InputStreamReader(is, "UTF-8").toString());
 		try {
 			JSONObject json = new JSONObject(tokener);
-			chartdata.getChartData().put("pig", json.getJSONArray("pig"));
-			chartdata.getChartData().put("corn", json.getJSONArray("corn"));
+			chartdata.setPigdata(json.getJSONArray("pig"));
+			chartdata.setCorndata(json.getJSONArray("corn"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
