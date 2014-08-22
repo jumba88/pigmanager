@@ -22,6 +22,7 @@ import com.honglang.app.widget.ScrollLayout;
 import com.honglang.app.widget.ScrollLayout.OnViewChangeListener;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -236,17 +237,29 @@ public class Main extends FragmentActivity {
 				Message msg = new Message();
 				try {
 					ChartData data = appContext.getChartData("100000");
-//					msg.what = data;
+					Log.i("suxoyo", "size="+data.getSize());
+					msg.what = data.getSize();
+					msg.obj = data;
 				} catch (AppException e) {
 					e.printStackTrace();
+					msg.what = -1;
+					msg.obj = e;
 				}
-//				InputStream is = ApiClient.getChartData(appContext, "100000");
-//				Log.i("suxoyo", is.toString());
-//				JSONTokener tokener = JSONTokener
+				
+				priceHandler.sendMessage(msg);
 			}
 		}.start();
 		
 	}
+	
+	Handler priceHandler = new Handler(){
+		public void handleMessage(Message msg){
+			if (msg.what == 2) {
+				
+			}
+			super.handleMessage(msg);
+		}
+	};
 	
 	private OnClickListener btnPriceClick(final Button btn){
 		return new OnClickListener() {

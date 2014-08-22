@@ -1,5 +1,6 @@
 package com.honglang.app.bean;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,14 +12,24 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.util.JsonReader;
+import android.util.Log;
 
 import com.honglang.app.AppException;
 
 public class ChartData extends Entity {
 	
+	private int size;
 	private JSONArray pigdata;
 	private JSONArray corndata;
 	
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
 	public JSONArray getPigdata() {
 		return pigdata;
 	}
@@ -37,10 +48,15 @@ public class ChartData extends Entity {
 
 	public static ChartData parse(InputStream is) throws IOException, AppException {
 		ChartData chartdata = new ChartData();
-//		JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
-		JSONTokener tokener = new JSONTokener(new InputStreamReader(is, "UTF-8").toString());
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		StringBuilder builder = new StringBuilder();
+		String line = null;
 		try {
-			JSONObject json = new JSONObject(tokener);
+			while ((line = reader.readLine()) != null) {
+				builder.append(line + "\n");
+			}
+			JSONObject json = new JSONObject(builder.toString());
+			chartdata.setSize(json.length());
 			chartdata.setPigdata(json.getJSONArray("pig"));
 			chartdata.setCorndata(json.getJSONArray("corn"));
 		} catch (JSONException e) {

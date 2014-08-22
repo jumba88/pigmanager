@@ -165,7 +165,7 @@ public class ApiClient {
 					throw AppException.http(statusCode);
 				}
 				responseBody = httpGet.getResponseBodyAsString();
-				Log.i("suxoyo", "responseBody="+responseBody);
+//				Log.i("suxoyo", "responseBody="+responseBody);
 				break;				
 			} catch (HttpException e) {
 				time++;
