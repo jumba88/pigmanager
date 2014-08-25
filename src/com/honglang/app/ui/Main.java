@@ -57,6 +57,8 @@ public class Main extends FragmentActivity {
 	private Button btn_Price_pig;
 	private Button btn_Price_corn;
 	
+	private LinearLayout layoutPig;
+	private LinearLayout layoutCorn;
 	private Chart chartPig;
 	private Chart chartCorn;
 
@@ -224,6 +226,9 @@ public class Main extends FragmentActivity {
 		btn_Price_pig = (Button) findViewById(R.id.price_pig);
 		btn_Price_corn = (Button) findViewById(R.id.price_corn);
 		
+		layoutPig = (LinearLayout) findViewById(R.id.layout1);
+		layoutCorn = (LinearLayout) findViewById(R.id.layout2);
+		
 		chartPig = (Chart) findViewById(R.id.chart1);
 		chartCorn = (Chart) findViewById(R.id.chart2);
 		
@@ -268,17 +273,18 @@ public class Main extends FragmentActivity {
 			public void onClick(View v) {
 				if (btn == btn_Price_pig) {
 					btn_Price_pig.setEnabled(false);
-					chartPig.setVisibility(View.VISIBLE);
+					layoutPig.setVisibility(View.VISIBLE);
 				} else {
 					btn_Price_pig.setEnabled(true);
-					chartPig.setVisibility(View.GONE);
+					layoutPig.setVisibility(View.GONE);
 				}
+				
 				if (btn == btn_Price_corn) {
 					btn_Price_corn.setEnabled(false);
-					chartCorn.setVisibility(View.VISIBLE);
+					layoutCorn.setVisibility(View.VISIBLE);
 				} else {
 					btn_Price_corn.setEnabled(true);
-					chartCorn.setVisibility(View.GONE);
+					layoutCorn.setVisibility(View.GONE);
 				}
 			}
 		};
