@@ -4,7 +4,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.data.DataSet;
+import com.github.mikephil.charting.data.Entry;
 import com.honglang.app.ApiClient;
 import com.honglang.app.AppContext;
 import com.honglang.app.AppException;
@@ -61,6 +67,8 @@ public class Main extends FragmentActivity {
 	private LinearLayout layoutCorn;
 	private Chart chartPig;
 	private Chart chartCorn;
+	private JSONArray pigData;
+	private JSONArray cornData;
 
 	private RadioButton rbNews;
 	private RadioButton rbPrice;
@@ -232,6 +240,8 @@ public class Main extends FragmentActivity {
 		chartPig = (Chart) findViewById(R.id.chart1);
 		chartCorn = (Chart) findViewById(R.id.chart2);
 		
+//		chartPig.set
+		
 		btn_Price_pig.setEnabled(false);
 		
 		btn_Price_pig.setOnClickListener(btnPriceClick(btn_Price_pig));
@@ -260,11 +270,43 @@ public class Main extends FragmentActivity {
 	Handler priceHandler = new Handler(){
 		public void handleMessage(Message msg){
 			if (msg.what == 2) {
+				ChartData data = (ChartData) msg.obj;
 				
+				pigData = data.getPigdata();
+				cornData = data.getCorndata();
+				setPigChartData(0);
 			}
 			super.handleMessage(msg);
 		}
 	};
+	
+	/**
+	 * 设置生猪价格走势图数据
+	 * @param index
+	 */
+	private void setPigChartData(int index){
+		try {
+			JSONObject data = pigData.getJSONObject(index);
+			JSONArray cDate = data.getJSONArray("cDate");
+			JSONArray cData = data.getJSONArray("cData");
+			ArrayList<String> xVals = new ArrayList<String>();
+			ArrayList<Entry> yVals = new ArrayList<Entry>();
+			for (int i = 0; i < cDate.length(); i++) {
+				xVals.add(cDate.getString(i));
+				float val = (float) cData.getDouble(i);
+				yVals.add(new Entry(val, i));
+			}
+			
+			DataSet set = new DataSet(yVals, 0);
+			ArrayList<DataSet> datasets= new ArrayList<DataSet>();
+			datasets.add(set);
+			com.github.mikephil.charting.data.ChartData chartdata = new com.github.mikephil.charting.data.ChartData(xVals, datasets);
+			chartPig.setData(chartdata);
+			chartPig.invalidate();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private OnClickListener btnPriceClick(final Button btn){
 		return new OnClickListener() {
