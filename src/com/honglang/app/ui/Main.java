@@ -9,8 +9,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.honglang.app.ApiClient;
 import com.honglang.app.AppContext;
 import com.honglang.app.AppException;
@@ -24,6 +26,7 @@ import com.honglang.app.fragment.HeadlineFragment;
 import com.honglang.app.fragment.PigPriceFragment;
 import com.honglang.app.utils.UIHelper;
 import com.honglang.app.viewpagerindicator.TabPageIndicator;
+import com.honglang.app.widget.ChartMarkerView;
 import com.honglang.app.widget.ScrollLayout;
 import com.honglang.app.widget.ScrollLayout.OnViewChangeListener;
 
@@ -65,8 +68,8 @@ public class Main extends FragmentActivity {
 	
 	private LinearLayout layoutPig;
 	private LinearLayout layoutCorn;
-	private Chart chartPig;
-	private Chart chartCorn;
+	private LineChart chartPig;
+	private LineChart chartCorn;
 	private JSONArray pigData;
 	private JSONArray cornData;
 
@@ -237,10 +240,23 @@ public class Main extends FragmentActivity {
 		layoutPig = (LinearLayout) findViewById(R.id.layout1);
 		layoutCorn = (LinearLayout) findViewById(R.id.layout2);
 		
-		chartPig = (Chart) findViewById(R.id.chart1);
-		chartCorn = (Chart) findViewById(R.id.chart2);
+		chartPig = (LineChart) findViewById(R.id.chart1);
+		chartCorn = (LineChart) findViewById(R.id.chart2);
 		
-//		chartPig.set
+		ColorTemplate ct = new ColorTemplate();
+		ct.addColorsForDataSets(new int[]{R.color.colorful_2}, this);
+		
+		chartPig.setColorTemplate(ct);
+		chartPig.setStartAtZero(false);
+		chartPig.setDrawYValues(false);
+		chartPig.setLineWidth(4f);
+		chartPig.setCircleSize(4f);
+//		chartPig.setYLegendCount(8);
+//		chartPig.setHighlightIndicatorEnabled(false);
+		ChartMarkerView mv = new ChartMarkerView(this, R.layout.custom_marker_view);
+		mv.setOffsets(-mv.getMeasuredWidth() / 2, -mv.getMeasuredHeight());
+		chartPig.setMarkerView(mv);
+		chartPig.setDescription("猪肉价格走势图");
 		
 		btn_Price_pig.setEnabled(false);
 		
@@ -252,7 +268,7 @@ public class Main extends FragmentActivity {
 				Message msg = new Message();
 				try {
 					ChartData data = appContext.getChartData("100000");
-					Log.i("suxoyo", "size="+data.getSize());
+//					Log.i("suxoyo", "size="+data.getSize());
 					msg.what = data.getSize();
 					msg.obj = data;
 				} catch (AppException e) {
