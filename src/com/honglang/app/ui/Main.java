@@ -256,7 +256,19 @@ public class Main extends FragmentActivity {
 		ChartMarkerView mv = new ChartMarkerView(this, R.layout.custom_marker_view);
 		mv.setOffsets(-mv.getMeasuredWidth() / 2, -mv.getMeasuredHeight());
 		chartPig.setMarkerView(mv);
-		chartPig.setDescription("猪肉价格走势图");
+		chartPig.setDescription("猪肉价格走势图(元/公斤)");
+		
+		chartCorn.setColorTemplate(ct);
+		chartCorn.setStartAtZero(false);
+		chartCorn.setDrawYValues(false);
+		chartCorn.setLineWidth(4f);
+		chartCorn.setCircleSize(4f);
+//		chartCorn.setYLegendCount(8);
+//		chartCorn.setHighlightIndicatorEnabled(false);
+//		ChartMarkerView mv = new ChartMarkerView(this, R.layout.custom_marker_view);
+//		mv.setOffsets(-mv.getMeasuredWidth() / 2, -mv.getMeasuredHeight());
+		chartCorn.setMarkerView(mv);
+		chartCorn.setDescription("玉米价格走势图(元/吨)");
 		
 		btn_Price_pig.setEnabled(false);
 		
@@ -291,6 +303,10 @@ public class Main extends FragmentActivity {
 				pigData = data.getPigdata();
 				cornData = data.getCorndata();
 				setPigChartData(0);
+				setCornChartData(0);
+				if (pigData != null && pigData.length() > 0) {
+					layoutPig.setVisibility(View.VISIBLE);
+				}
 			}
 			super.handleMessage(msg);
 		}
@@ -323,6 +339,33 @@ public class Main extends FragmentActivity {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 设置生猪价格走势图数据
+	 * @param index
+	 */
+	private void setCornChartData(int index){
+		try {
+			JSONObject data = cornData.getJSONObject(index);
+			JSONArray cDate = data.getJSONArray("cDate");
+			JSONArray cData = data.getJSONArray("cData");
+			ArrayList<String> xVals = new ArrayList<String>();
+			ArrayList<Entry> yVals = new ArrayList<Entry>();
+			for (int i = 0; i < cDate.length(); i++) {
+				xVals.add(cDate.getString(i));
+				float val = (float) cData.getDouble(i);
+				yVals.add(new Entry(val, i));
+			}
+			
+			DataSet set = new DataSet(yVals, 0);
+			ArrayList<DataSet> datasets= new ArrayList<DataSet>();
+			datasets.add(set);
+			com.github.mikephil.charting.data.ChartData chartdata = new com.github.mikephil.charting.data.ChartData(xVals, datasets);
+			chartCorn.setData(chartdata);
+			chartCorn.invalidate();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private OnClickListener btnPriceClick(final Button btn){
 		return new OnClickListener() {
@@ -331,7 +374,9 @@ public class Main extends FragmentActivity {
 			public void onClick(View v) {
 				if (btn == btn_Price_pig) {
 					btn_Price_pig.setEnabled(false);
-					layoutPig.setVisibility(View.VISIBLE);
+					if (pigData != null && pigData.length() > 0) {
+						layoutPig.setVisibility(View.VISIBLE);
+					}
 				} else {
 					btn_Price_pig.setEnabled(true);
 					layoutPig.setVisibility(View.GONE);
@@ -339,7 +384,9 @@ public class Main extends FragmentActivity {
 				
 				if (btn == btn_Price_corn) {
 					btn_Price_corn.setEnabled(false);
-					layoutCorn.setVisibility(View.VISIBLE);
+					if (cornData != null && cornData.length() > 0) {
+						layoutCorn.setVisibility(View.VISIBLE);
+					}
 				} else {
 					btn_Price_corn.setEnabled(true);
 					layoutCorn.setVisibility(View.GONE);
